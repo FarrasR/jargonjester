@@ -14,7 +14,7 @@ var V20230410151447 = gormigrate.Migration{
 			gorm.Model
 			ChannelID   string    `gorm:"type:varchar(255);not null; index:channel_message_idx" `
 			Username    string    `gorm:"type:varchar(255);not null"`
-			Content     string    `gorm:"type:varchar(255);not null"`
+			Content     string    `gorm:"not null"`
 			MessageTime time.Time `gorm:"index:channel_message_idx"`
 		}
 

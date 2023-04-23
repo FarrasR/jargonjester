@@ -1,5 +1,6 @@
 package domain
 
 type ChatUsecase interface {
-	ChannelChat(channelID string, username string, message string) (string, error)
+	GroupChat(channelID string, username string, message string) (string, error)
+	PrivateChat(channelID string, username string, message string) (string, error)
 }

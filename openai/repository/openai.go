@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"jargonjester/domain"
 	"net/http"
 )
@@ -38,13 +37,7 @@ func (r *openaiRepository) sendRequest(method, resource string, requestBody inte
 	resp, _ := r.httpClient.Do(req)
 
 	if resp.StatusCode != http.StatusOK {
-
-		body, err := ioutil.ReadAll(resp.Body)
-
-		fmt.Println("joidwqjoid")
-		fmt.Println(string(body))
-		fmt.Println(resp.StatusCode)
-		return nil, err
+		return nil, fmt.Errorf("something went wrong")
 	}
 
 	return resp, nil

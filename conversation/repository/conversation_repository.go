@@ -17,10 +17,10 @@ func NewConversationRepository(db *gorm.DB) domain.ConversationRepository {
 	}
 }
 
-func (r *conversationRepository) GetLast10MessageInAChannel(channelID string) ([]entity.Conversation, error) {
+func (r *conversationRepository) GetMessagesInAChannel(channelID string) ([]entity.Conversation, error) {
 	var conversations []entity.Conversation
 
-	if result := r.db.Limit(10).Where(&entity.Conversation{ChannelID: channelID}).Order("message_time desc").Find(&conversations); result.Error != nil {
+	if result := r.db.Limit(100).Where(&entity.Conversation{ChannelID: channelID}).Order("message_time desc").Find(&conversations); result.Error != nil {
 		return []entity.Conversation{}, result.Error
 	}
 
