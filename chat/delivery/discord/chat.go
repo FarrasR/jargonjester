@@ -3,9 +3,14 @@ package discord
 import (
 	"fmt"
 	"jargonjester/domain"
+	"jargonjester/utils"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
+)
+
+const (
+	DiscordCharacterLimit = 1500
 )
 
 type ChatHandler struct {
@@ -54,7 +59,14 @@ func (h *ChatHandler) handleGroupChat(s *discordgo.Session, m *discordgo.Message
 		)
 	}
 
-	s.ChannelMessageSend(m.ChannelID, response)
+	messages := utils.SplitStringByLength(response, DiscordCharacterLimit)
+
+	for _, messagge := range messages {
+		_, err := s.ChannelMessageSend(m.ChannelID, messagge)
+		if err != nil {
+			fmt.Println("something wrong when sending group message", err)
+		}
+	}
 
 }
 
@@ -84,5 +96,13 @@ func (h *ChatHandler) handlePrivateChat(s *discordgo.Session, m *discordgo.Messa
 		)
 	}
 
-	s.ChannelMessageSend(m.ChannelID, response)
+	messages := utils.SplitStringByLength(response, DiscordCharacterLimit)
+
+	for _, messagge := range messages {
+		_, err := s.ChannelMessageSend(m.ChannelID, messagge)
+		if err != nil {
+			fmt.Println("somethign wrong when sending private message", err)
+		}
+	}
+
 }
