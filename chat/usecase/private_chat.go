@@ -9,6 +9,13 @@ import (
 )
 
 func (u *chatUsecase) PrivateChat(channelID string, username string, message string) (string, error) {
+	//for now lets use the same key for all
+	err := u.configRepository.IsLimited("chat")
+
+	if err != nil {
+		return "", err
+	}
+
 	previousConversations, err := u.conversationRepository.GetMessagesInAChannel(channelID)
 	if err != nil {
 		return "", err

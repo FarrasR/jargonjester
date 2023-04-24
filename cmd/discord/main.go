@@ -4,6 +4,7 @@ import (
 	"fmt"
 	chatDiscordHandler "jargonjester/chat/delivery/discord"
 	chatUsecase "jargonjester/chat/usecase"
+	configRepository "jargonjester/config/repository"
 	conversationRepository "jargonjester/conversation/repository"
 	"jargonjester/database"
 	"jargonjester/discord"
@@ -23,8 +24,9 @@ func main() {
 
 	conversationRepository := conversationRepository.NewConversationRepository(db)
 	openaiRepository := openaiRepository.NewOpenaiRepository(os.Getenv("OPENAI_HOST"), os.Getenv("OPENAI_KEY"))
+	configRepository := configRepository.NewconfigRepository(100, 1440)
 
-	chatUsecase := chatUsecase.NewChatUsercase(conversationRepository, openaiRepository)
+	chatUsecase := chatUsecase.NewChatUsercase(conversationRepository, openaiRepository, configRepository)
 
 	chatHandler := chatDiscordHandler.NewChatHandler(chatUsecase)
 

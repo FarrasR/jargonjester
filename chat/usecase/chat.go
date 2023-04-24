@@ -17,11 +17,17 @@ const (
 type chatUsecase struct {
 	conversationRepository domain.ConversationRepository
 	openaiRepository       domain.OpenaiRepository
+	configRepository       domain.ConfigRepository
 }
 
-func NewChatUsercase(conversationRepository domain.ConversationRepository, openaiRepository domain.OpenaiRepository) domain.ChatUsecase {
+func NewChatUsercase(
+	conversationRepository domain.ConversationRepository,
+	openaiRepository domain.OpenaiRepository,
+	configRepository domain.ConfigRepository,
+) domain.ChatUsecase {
 	return &chatUsecase{
 		conversationRepository: conversationRepository,
 		openaiRepository:       openaiRepository,
+		configRepository:       configRepository,
 	}
 }
