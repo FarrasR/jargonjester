@@ -31,7 +31,7 @@ func (u *chatUsecase) GroupChat(channelID string, username string, message strin
 
 	tokenCount, err := tiktoken.EncodingForModel(gptModel)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
 	//counting token

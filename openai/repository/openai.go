@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"jargonjester/domain"
 	"net/http"
 )
@@ -37,7 +38,8 @@ func (r *openaiRepository) sendRequest(method, resource string, requestBody inte
 	resp, _ := r.httpClient.Do(req)
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("something went wrong")
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf(string(body))
 	}
 
 	return resp, nil

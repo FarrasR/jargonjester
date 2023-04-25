@@ -46,7 +46,7 @@ func (r *openaiRepository) CompleteChat(model string, messages []entity.Message)
 
 	resp, err := r.sendRequest(http.MethodPost, completeChatURL, payload)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 	defer resp.Body.Close()
 

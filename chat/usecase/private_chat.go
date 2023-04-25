@@ -32,7 +32,7 @@ func (u *chatUsecase) PrivateChat(channelID string, username string, message str
 
 	tokenCount, err := tiktoken.EncodingForModel(gptModel)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
 	promptcontenttokencount := tokenCount.Encode(promptGroupChatContent, nil, nil)
