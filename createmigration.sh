@@ -20,6 +20,6 @@ suffix=".go"
 
 filename="${version}__$( printf "$description" | sed 's/ /_/g' )$suffix"
 
-echo "package migrationVersion\n\nimport (\n\t\"github.com/go-gormigrate/gormigrate/v2\"\n)\n\nvar V${version} = gormigrate.Migration{\n\tID: \"V${version}\",\n}" > $location$filename
+echo "package migration\n\nimport (\n\t\"github.com/go-gormigrate/gormigrate/v2\"\n)\n\nvar V${version} = gormigrate.Migration{\n\tID: \"V${version}\",\n}" > $location$filename
 echo "Migration successfully created"
 echo "Migration file: file://$location$filename"

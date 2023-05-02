@@ -20,11 +20,10 @@ type chatUsecase struct {
 	configRepository       domain.ConfigRepository
 }
 
-func NewChatUsercase(
+func NewChatUsecase(
 	conversationRepository domain.ConversationRepository,
 	openaiRepository domain.OpenaiRepository,
-	configRepository domain.ConfigRepository,
-) domain.ChatUsecase {
+	configRepository domain.ConfigRepository) domain.ChatUsecase {
 	return &chatUsecase{
 		conversationRepository: conversationRepository,
 		openaiRepository:       openaiRepository,
